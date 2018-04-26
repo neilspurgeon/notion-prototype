@@ -19,8 +19,7 @@ const Input = styled.input`
 `
 
 const Container = styled.div`
-  transition: .3s ease transform ,
-              2s ease height 1s,
+  transition: 2s ease height 1s,
               1s ease background-color .3s;
   transition-delay: .1s;
   background-color: rgba(255, 255, 255, 0);
@@ -29,12 +28,11 @@ const Container = styled.div`
   width: 100%;
 
   ${({ active }) => active && css `
-    transform: translateY(-41vh);
+    top: 20px;
     background-color: rgba(255, 255, 255, 1);
     height: 100vh;
     position: fixed;
-    transition: .3s ease transform .1s,
-                .3s ease height,
+    transition: .3s ease height,
                 .2s ease background-color;
     `}
 `
