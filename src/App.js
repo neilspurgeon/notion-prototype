@@ -1,10 +1,14 @@
 import React from 'react';
 import Header from 'components/Header';
+import SubHeader from 'components/SubHeader';
 
 class App extends React.Component {
   render() {
     return (
-      <Header />
+      <div>
+        <Header />
+        <SubHeader />
+      </div>
     );
   }
 }
