@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import searchIcon from './searchIcon.svg';
 import clearIcon from './clearIcon.svg';
@@ -83,8 +83,21 @@ const Cancel = styled.div`
   `}
 `
 
+const slideUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  },
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
 const SearchResults = styled.div`
   margin: 0 25px;
+  transition: 5s ease all;
+  animation: ${slideUp} .3s ease;
 `
 
 const ResultUl = styled.ul`
@@ -107,11 +120,66 @@ const RecentHeader = styled.h2`
   color: #424241;
 `
 
+const SectionHeader = styled.h2`
+  padding: 2px 10px 3px;
+  display: inline-block;
+  font-weight: 400;
+  font-size: 1.4rem;
+  border-radius: 3px;
+  color: #424241;
+  ${props => (props.type == "notStarted") && `
+    background-color: #FECBD0;
+  `}
+
+  ${props => (props.type == "inProgress") && `
+    background-color: #FFF0C9;
+  `}
+
+  ${props => (props.type == "complete") && `
+    background-color: #CAE8E4;
+  `}
+
+  ${props => (props.type == "hidden") && `
+    background-color: #DADADA;
+  `}
+`
+
+const Item = styled.li`
+  border: 1px solid #E6E6E6;
+  border-radius: 3px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 13px 10px 16px;
+  margin-bottom: 10px;
+  color: #424241;
+  list-style: none;
+`
+
+const NoResultsP = styled.p`
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #A5A5A5;
+  margin-top: 0;
+`
+
+const NoResultsHeader = styled.h2`
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #424241;
+  padding-top: 10vh;
+  margin-bottom: 5px;
+`
+
+
+
+
 class SubHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false
+      active: false,
     }
   }
 
@@ -138,6 +206,8 @@ class SubHeader extends React.Component {
 
         </SearchWrapper>
 
+
+        {/* Suggestioned Search  */}
         {this.state.active && !this.props.value &&
           <SearchResults>
 
@@ -146,6 +216,36 @@ class SubHeader extends React.Component {
               {this.props.suggestions.map((text, i) => <RencentLi key={text}>{text}</RencentLi> ) }
             </ResultUl>
 
+          </SearchResults>
+        }
+
+        {/* Search Results  */}
+        {this.props.items && this.props.value &&
+          <SearchResults>
+
+              {this.props.items.map((category, i) => {
+                if (category.items[0]) {
+                  return (
+
+                    <div>
+                      <SectionHeader type={category.type}>{category.type}</SectionHeader>
+                      <ResultUl>
+                        {category.items.map((item, i) => { return <Item>{item}</Item> }) }
+                      </ResultUl>
+                    </div>
+
+                  )
+                }
+              })}
+
+          </SearchResults>
+        }
+
+        {/* No Results  */}
+        {this.props.value && !this.props.items[0] &&
+          <SearchResults>
+            <NoResultsHeader>No Results Found</NoResultsHeader>
+            <NoResultsP>Please check the spelling or  try searching for something else.</NoResultsP>
           </SearchResults>
         }
 
