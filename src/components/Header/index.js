@@ -41,15 +41,15 @@ const Actions = styled.span`
 const Header = () => {
   return (
     <Wrapper>
-      
+
       <MenuBttn>
-        <img src={menu} />
+        <img src={menu} alt="menu"/>
       </MenuBttn>
-      
+
       <Title>Getting a Job a...</Title>
-      
+
       <Actions>
-        <img src={actions} />
+        <img src={actions} alt="actions" />
       </Actions>
 
     </Wrapper>

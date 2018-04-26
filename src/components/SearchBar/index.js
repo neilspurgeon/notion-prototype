@@ -127,19 +127,19 @@ const SectionHeader = styled.h2`
   font-size: 1.4rem;
   border-radius: 3px;
   color: #424241;
-  ${props => (props.type == "notStarted") && `
+  ${props => (props.type === "notStarted") && `
     background-color: #FECBD0;
   `}
 
-  ${props => (props.type == "inProgress") && `
+  ${props => (props.type === "inProgress") && `
     background-color: #FFF0C9;
   `}
 
-  ${props => (props.type == "complete") && `
+  ${props => (props.type === "complete") && `
     background-color: #CAE8E4;
   `}
 
-  ${props => (props.type == "hidden") && `
+  ${props => (props.type === "hidden") && `
     background-color: #DADADA;
   `}
 `
@@ -226,16 +226,15 @@ class SubHeader extends React.Component {
               {this.props.items.map((category, i) => {
                 if (category.items[0]) {
                   return (
-
                     <div>
                       <SectionHeader type={category.type}>{category.type}</SectionHeader>
                       <ResultUl>
                         {category.items.map((item, i) => { return <Item>{item}</Item> }) }
                       </ResultUl>
                     </div>
-
                   )
                 }
+                return null;
               })}
 
           </SearchResults>

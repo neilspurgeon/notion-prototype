@@ -56,13 +56,15 @@ class Board extends React.Component {
       category.items.filter((item) => {
         let foundItem = item.toLowerCase().search(text.toLowerCase()) !== -1;
         if (foundItem) {
-          obj.items.push(item);
+          return obj.items.push(item);
         }
+        return null;
       });
 
       if (obj.items[0]) {
-        filteredItems.push(obj);
+        return filteredItems.push(obj);
       }
+      return null;
 
     })
 
