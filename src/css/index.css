@@ -1,0 +1,12 @@
+* { box-sizing: border-box; }
+
+/*62.5% * 16px = 10px base font size*/
+html { font-size: 62.5%; }
+
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: 1.4rem;
+  margin: 0;
+  /* line-height: 0; */
+  -webkit-tap-highlight-color: transparent;
+}
