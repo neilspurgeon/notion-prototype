@@ -42,6 +42,7 @@ const Actions = styled.img`
 const Count = styled.span`
   flex-grow: 2;
   padding: 0 10px;
+  color: #424241;
 `
 
 const Wrapper = styled.div`
@@ -75,14 +76,14 @@ const BoardCol = (props) => {
         }
 
         {props.type === "completed" &&
-          <SectionLabel type="complete">Completed</SectionLabel>
+          <SectionLabel type="completed">Completed</SectionLabel>
         }
 
         {props.type === "hidden" &&
           <SectionLabel type="hidden">Hidden</SectionLabel>
         }
 
-        <Count>1</Count>
+        <Count>{props.items && props.items.length}</Count>
 
         <Actions src={actionIcons} alt="actions" />
       </Header>
