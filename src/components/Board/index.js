@@ -102,7 +102,7 @@ class Board extends React.Component {
         <HorizontalScroll>
           <BoardCol type="notStarted" items={notStartedArr} />
           <BoardCol type="inProgress" items={inProgressArr} />
-          <BoardCol type="complete" items={completeArr} />
+          <BoardCol type="completed" items={completeArr} />
           <BoardCol type="hidden" />
         </HorizontalScroll>
 
