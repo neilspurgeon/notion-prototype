@@ -60,7 +60,6 @@ const Item = styled.div`
 `
 
 const BoardCol = (props) => {
-  console.log(props);
   return (
     <Wrapper>
 
@@ -87,7 +86,7 @@ const BoardCol = (props) => {
       </Header>
 
       {props.items && props.items.map( (item, i) =>
-        <Item>{item.title}</Item>
+        <Item key={item + i}>{item}</Item>
       )}
 
     </Wrapper>

@@ -4,19 +4,22 @@ import BoardHeader from 'components/BoardHeader';
 import SearchBar from 'components/SearchBar';
 import BoardCol from 'components/BoardCol';
 
-const notStartedArr = [
-  { title: "Interview 1"},
-  { title: "Interview 2" },
+const itemsArr = [
+  {
+    type: "notStarted",
+    items: ["Interview 1", "Interview 2"]
+  }, {
+    type: "inProgress",
+    items: ["Design Exercise"]
+  }, {
+    type: "complete",
+    items: ["Phone Call"]
+  }
 ]
 
-const inProgressArr = [
-  { title: "Design Exercise"},
-]
-
-const completeArr = [
-  { title: "Phone Call" },
-]
-
+const notStartedArr = [ "Interview 1", "Interview 2"]
+const inProgressArr = ["Design Exercise"]
+const completeArr = ["Phone Call"]
 const recentSearchArr = ["Interview", "Inter", "Phone", "Design", "Exercise"];
 
 const HorizontalScroll = styled.div`
@@ -31,7 +34,9 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchValue: ""
+      searchValue: "",
+      initialItems: itemsArr,
+      filteredItems: ""
     }
   }
 
@@ -39,18 +44,43 @@ class Board extends React.Component {
     this.setState({
       searchValue: e.target.value
     })
+    this.filter(e.target.value);
+  }
+
+  filter = (text) => {
+    let filteredItems = [];
+
+    this.state.initialItems.map((category) => {
+      let obj = {type: category.type, items: []};
+
+      category.items.filter((item) => {
+        let foundItem = item.toLowerCase().search(text.toLowerCase()) !== -1;
+        if (foundItem) {
+          obj.items.push(item);
+        }
+      });
+
+      if (obj.items[0]) {
+        filteredItems.push(obj);
+      }
+
+    })
+
+    this.setState({ filteredItems: filteredItems });
   }
 
   handleClearSearch = () => {
     this.setState({
-      searchValue: ""
-    })
+      searchValue: "",
+      filteredItems: ""
+    });
   }
 
   handleCancelSearch = () => {
     this.setState({
-      searchValue: ""
-    })
+      searchValue: "",
+      filteredItems: ""
+    });
   }
 
 
@@ -64,6 +94,7 @@ class Board extends React.Component {
           onClear={this.handleClearSearch}
           onCancel={this.handleCancelSearch}
           suggestions={recentSearchArr}
+          items={this.state.filteredItems}
         />
 
         <HorizontalScroll>
