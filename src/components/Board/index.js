@@ -12,7 +12,7 @@ const itemsArr = [
     type: "inProgress",
     items: ["Design Exercise"]
   }, {
-    type: "complete",
+    type: "completed",
     items: ["Phone Call"]
   }
 ]

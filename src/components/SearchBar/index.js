@@ -135,7 +135,7 @@ const SectionHeader = styled.h2`
     background-color: #FFF0C9;
   `}
 
-  ${props => (props.type === "complete") && `
+  ${props => (props.type === "completed") && `
     background-color: #CAE8E4;
   `}
 

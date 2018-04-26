@@ -18,7 +18,7 @@ const SectionLabel = styled.h2`
     background-color: #FFF0C9;
   `}
 
-  ${props => (props.type === "complete") && `
+  ${props => (props.type === "completed") && `
     background-color: #CAE8E4;
   `}
 
@@ -74,8 +74,8 @@ const BoardCol = (props) => {
           <SectionLabel type="inProgress">In Progress</SectionLabel>
         }
 
-        {props.type === "complete" &&
-          <SectionLabel type="complete">Complete</SectionLabel>
+        {props.type === "completed" &&
+          <SectionLabel type="complete">Completed</SectionLabel>
         }
 
         {props.type === "hidden" &&
