@@ -231,7 +231,7 @@ class SubHeader extends React.Component {
                     <div>
                       <SectionHeader type={category.type}>{category.type}</SectionHeader>
                       <ResultUl>
-                        {category.items.map((item, i) => { return <Item>{item}</Item> }) }
+                        {category.items.map((item, i) => { return <Item key={item + i}>{item}</Item> }) }
                       </ResultUl>
                     </div>
                   )
