@@ -140,7 +140,9 @@ const SectionHeader = styled.h2`
   `}
 
   ${props => (props.type === "hidden") && `
-    background-color: #DADADA;
+    background-color: #FFF;
+    color: #C4C4C4
+    padding-left: 0;
   `}
 `
 
