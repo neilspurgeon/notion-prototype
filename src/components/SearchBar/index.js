@@ -19,16 +19,24 @@ const Input = styled.input`
 `
 
 const Container = styled.div`
-  transition: .3s ease all;
+  transition: .3s ease transform ,
+              2s ease height 1s,
+              1s ease background-color .3s;
   transition-delay: .1s;
-  background-color: rgba(255, 255, 255, 1);
-  height: 100vh;
+  background-color: rgba(255, 255, 255, 0);
+  height: 10vh;
+  position: absolute;
+  width: 100%;
 
   ${({ active }) => active && css `
     transform: translateY(-41vh);
     background-color: rgba(255, 255, 255, 1);
     height: 100vh;
-  `}
+    position: fixed;
+    transition: .3s ease transform .1s,
+                .3s ease height,
+                .2s ease background-color;
+    `}
 `
 
 const SearchWrapper = styled.div`
@@ -75,6 +83,30 @@ const Cancel = styled.div`
   `}
 `
 
+const SearchResults = styled.div`
+  margin: 0 25px;
+`
+
+const ResultUl = styled.ul`
+  padding: 0;
+`
+
+const RencentLi = styled.li`
+  list-style: none;
+  padding: 15px 0;
+  border-bottom: 1px solid #E6E6E6;
+  margin: 0;
+  color: #A5A5A5;
+  font-weight: 400;
+  font-size: 1.6rem;
+`
+
+const RecentHeader = styled.h2`
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #424241;
+`
+
 class SubHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -105,6 +137,18 @@ class SubHeader extends React.Component {
           <Cancel onClick={this.handleCancel} active={this.state.active}>Cancel</Cancel>
 
         </SearchWrapper>
+
+        {this.state.active && !this.props.value &&
+          <SearchResults>
+
+            <RecentHeader>Recent</RecentHeader>
+            <ResultUl>
+              {this.props.suggestions.map((text, i) => <RencentLi key={text}>{text}</RencentLi> ) }
+            </ResultUl>
+
+          </SearchResults>
+        }
+
       </Container>
     )
   }
